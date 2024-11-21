@@ -17,14 +17,19 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tuition_requests", schema = "public")
 public class TuitionRequest {
+	
+	
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-   
-	@ManyToOne
+    
+    @ManyToOne
 	@JoinColumn(name = "student_id", referencedColumnName = "id")
     private User student;
+
+   
+	
     
     @ManyToOne
     @JoinColumn(name = "tutor_id", referencedColumnName = "id")

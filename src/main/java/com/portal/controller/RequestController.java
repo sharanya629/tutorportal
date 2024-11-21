@@ -25,6 +25,8 @@ public class RequestController {
     private Tutor tutor;
     @Autowired
     private TutorRepository tutorRepository;
+    @Autowired
+    private User user;
 
     @PostMapping("/createRequest")
     public TuitionRequest createRequest(@RequestBody TuitionRequest request) {
@@ -39,7 +41,8 @@ public class RequestController {
 //    }
 
     @GetMapping("/student/{studentId}")
-    public ResponseEntity<List<TuitionRequest>> getRequestsForStudent(@PathVariable int studentId) {
+   // public ResponseEntity<List<TuitionRequest>> getRequestsForStudent(@PathVariable int studentId) {
+    public ResponseEntity<?> getRequestsForStudent(@PathVariable int studentId) {
         User student = new User();
         student.setId(studentId);
         List<TuitionRequest> requests = tuitionRequestService.getRequestsForStudent(student);
@@ -47,12 +50,12 @@ public class RequestController {
         if (requests.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<>(requests, HttpStatus.OK);
+            return  ResponseEntity.ok().header(null, null).body(requests);
         }
     }
 
     @PutMapping("/{requestId}/status")
-    public ResponseEntity<Void> updateRequestStatus(@PathVariable Long requestId, @RequestParam String status) {
+    public ResponseEntity<Void> updateRequestStatus(@PathVariable int requestId, @RequestParam String status) {
         tuitionRequestService.updateRequestStatus(requestId, status);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

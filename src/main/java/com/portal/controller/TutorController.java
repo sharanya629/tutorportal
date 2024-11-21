@@ -1,6 +1,8 @@
 package com.portal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.portal.entity.Tutor;
@@ -13,17 +15,22 @@ import java.util.List;
 @RequestMapping("/tutors")
 public class TutorController {
 
-    @Autowired
-    private TutorService tutorService;
+	private final TutorService tutorService;
+
+    public TutorController(TutorService tutorService) {
+        this.tutorService = tutorService;
+    }
 
     @PostMapping("/signup")
-    public Tutor signUp(@RequestBody Tutor tutor) {
-        return tutorService.saveTutor(tutor);
+    public ResponseEntity<Tutor> signUp(@RequestBody Tutor tutor) {
+        Tutor savedTutor = tutorService.saveTutor(tutor);
+        return new ResponseEntity<>(savedTutor, HttpStatus.CREATED);
     }
 
     @GetMapping("/search")
-    public List<Tutor> searchTutors(@RequestParam String subject, @RequestParam String location) {
-        return tutorService.searchTutors(subject, location);
+    public ResponseEntity<List<Tutor>> searchTutors(@RequestParam String subject, @RequestParam String location) {
+        List<Tutor> tutors = tutorService.searchTutors(subject, location);
+        return new ResponseEntity<>(tutors, HttpStatus.OK);
     }
     
     @GetMapping("/welcome") 

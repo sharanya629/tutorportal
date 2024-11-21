@@ -64,6 +64,8 @@ public class AuthController {
         final UserDetails userDetails = userService.loadUserByUsername(authRequest.getEmail());
         final String jwt = jwtUtil.generateToken(userDetails.getUsername());
 
-        return ResponseEntity.status(HttpStatus.OK).body(new AuthenticationResponse(jwt));
+       // return ResponseEntity.status(HttpStatus.OK).body(new AuthenticationResponse(jwt));
+        String token= new AuthenticationResponse(jwt).toString();
+        return ResponseEntity.ok().header("Authorization", "Bearer"+" "+jwt).body("access granted");
     }
 }

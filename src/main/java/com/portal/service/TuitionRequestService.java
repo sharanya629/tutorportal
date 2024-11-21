@@ -40,7 +40,7 @@ public class TuitionRequestService {
         return requestRepository.findByStudent(student);
     }
 
-    public void updateRequestStatus(Long requestId, String status) {
+    public void updateRequestStatus(Integer requestId, String status) {
     	TuitionRequest request = requestRepository.findById(requestId).orElseThrow(() -> new UserNotFoundException("Request not found"));
         request.setStatus(status);
         request.setUpdatedDate(new Timestamp(System.currentTimeMillis()));
