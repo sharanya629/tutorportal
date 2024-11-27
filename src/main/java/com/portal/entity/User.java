@@ -31,7 +31,7 @@ public class User {
     @NotBlank(message = "Location is mandatory")
     private String location;
     
-    //@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\\\d)[A-Za-z\\\\d]{8,}$", message = "Password must be at least 8 characters long and include at least one letter and one number.")
+    @Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", message = "Password must be at least 8 characters long and include at least one letter and one number.")
     @NotBlank(message = "Password is mandatory")
     private String password;
     @NotBlank(message = "Role is mandatory")
@@ -62,8 +62,8 @@ public class User {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int studentId) {
+		this.id = studentId;
 	}
 	public String getName() {
 		return name;

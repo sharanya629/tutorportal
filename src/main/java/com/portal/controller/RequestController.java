@@ -14,7 +14,6 @@ import com.portal.service.TuitionRequestService;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/requests")
 
 public class RequestController {
@@ -30,7 +29,9 @@ public class RequestController {
 
     @PostMapping("/createRequest")
     public TuitionRequest createRequest(@RequestBody TuitionRequest request) {
-        return tuitionRequestService.saveRequest(request);
+    	User studentId = request.getStudent();
+    	Tutor tutorId = request.getTutor();
+        return tuitionRequestService.saveRequest(request, studentId, tutorId);
     }
 
 //    @GetMapping("/tutor")

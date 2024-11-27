@@ -9,6 +9,8 @@ import com.portal.entity.Tutor;
 
 
 
-public interface TutorRepository extends JpaRepository<Tutor, Long> {
+public interface TutorRepository extends JpaRepository<Tutor, Integer> {
     List<Tutor> findBySubjectAndUser_Location(String subject, String location);
+    
+    
 }

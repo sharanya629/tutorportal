@@ -11,7 +11,7 @@ import com.portal.service.TutorService;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+
 @RequestMapping("/tutors")
 public class TutorController {
 
