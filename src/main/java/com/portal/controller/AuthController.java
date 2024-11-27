@@ -53,11 +53,22 @@ public class AuthController {
     	
     }
     
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUserById(@PathVariable Long id){
+    	if(!userRepository.existsById(id)) {
+    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+    	}
+    	userRepository.deleteById(id);
+    	return ResponseEntity.ok("User deleted successfully");
+    }
+    
     @GetMapping("/welcome") 
      public String welcomeUser() {
 		return "Welcome to our application!";
     	
     }
+    
+    
     
 
     @PostMapping("/signin")
